@@ -11,10 +11,10 @@ public class Cat {
         this.age = age;
         this.color = color;
     }
-    public void info(){
+    public final void info(){
         System.out.printf(" %s %d %s \n",name, age, color);
     }
-    public void meow(){
+    private void meow(){
         System.out.println(name + " meow");
     }
 }
