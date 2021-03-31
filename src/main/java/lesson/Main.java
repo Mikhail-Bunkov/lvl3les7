@@ -54,14 +54,13 @@ public class Main {
 
 
 
-        Class mt = MyTest.class;
-        Method[] methods = mt.getDeclaredMethods();
-        for (Method method : methods) {
-            if(method.isAnnotationPresent(Anno.class)){
-                method.invoke(null);
-            }
-        }
-
+//        Class mt = MyTest.class;
+//        Method[] methods = mt.getDeclaredMethods();
+//        for (Method method : methods) {
+//            if(method.isAnnotationPresent(Anno.class)){
+//                method.invoke(null);
+//            }
+//        }
 
 
 
