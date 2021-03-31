@@ -29,13 +29,13 @@ public class TestStarter {
         iterat =0;
 
 
-        for (Method m : methods) {
-            if (m.isAnnotationPresent(AfterSuite.class)) {
+        for (Method method : methods) {
+            if (method.isAnnotationPresent(AfterSuite.class)) {
                 iterat++;
                 if (iterat == 2) {
                     throw new RuntimeException("Должен быть один метод с аннотацией @AfterSuite");
                 }
-                    afterSuite = m;
+                    afterSuite = method;
             }
         }
         if (iterat == 0) {
@@ -49,10 +49,10 @@ public class TestStarter {
             e.printStackTrace();
         }
 
-        for (Method m : methods) {
-            if (m.isAnnotationPresent(Test.class)) {
+        for (Method meth : methods) {
+            if (meth.isAnnotationPresent(Test.class)) {
                 try {
-                    m.invoke(null);
+                    meth.invoke(null);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

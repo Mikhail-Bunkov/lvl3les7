@@ -1,5 +1,8 @@
 package lesson;
 
+import homework.TestClass1;
+import homework.TestStarter;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -7,6 +10,32 @@ import java.lang.reflect.Modifier;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+
+
+TestStarter.start(TestClass1.class);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //        Class c1 = Cat.class;
 ////        Class c2 = new Cat( "dfs", 23, "red").getClass();
 ////
@@ -50,10 +79,6 @@ public class Main {
 //        System.out.println(Modifier.isPublic(mod));
 
 
-
-
-
-
 //        Class mt = MyTest.class;
 //        Method[] methods = mt.getDeclaredMethods();
 //        for (Method method : methods) {
@@ -61,32 +86,6 @@ public class Main {
 //                method.invoke(null);
 //            }
 //        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
