@@ -2,17 +2,17 @@ package homework;
 
 public class TestClass1 {
     @BeforeSuite
-    public void testSoutBefore(){
+    public static void testSoutBefore(){
         System.out.println("Test");
     }
 
     @Test
-    public void testSout(){
+    public static void testSout(){
         System.out.println("Test");
     }
 
     @AfterSuite
-    public void testSoutAfter(){
+    public static void testSoutAfter(){
         System.out.println("Test");
     }
 }

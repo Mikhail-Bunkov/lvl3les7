@@ -14,34 +14,38 @@ public class TestStarter {
         Method beforeSuite = null;
         Method afterSuite = null;
         Method[] methods = testClass.getDeclaredMethods();
+
+/////////////////////////////////////////////////////////////
+        //Тест на наличие BeforeSuite
         for (Method m : methods) {
             if (m.isAnnotationPresent(BeforeSuite.class)) {
                 iterat++;
-                if (iterat == 2) {
+                beforeSuite = m;
+                if(iterat>1){
                     throw new RuntimeException("Должен быть один метод с аннотацией @BeforeSuite");
                 }
-                    beforeSuite = m;
             }
         }
-        if (iterat == 0) {
+        if(iterat==0){
             throw new RuntimeException("Должен быть один метод с аннотацией @BeforeSuite");
         }
-        iterat =0;
-
-
+        iterat=0;
+////////////////////////////////////////////
+        //Тест на наличие AfterSuite
         for (Method method : methods) {
             if (method.isAnnotationPresent(AfterSuite.class)) {
                 iterat++;
-                if (iterat == 2) {
+                afterSuite = method;
+                if(iterat>1){
                     throw new RuntimeException("Должен быть один метод с аннотацией @AfterSuite");
                 }
-                    afterSuite = method;
             }
         }
-        if (iterat == 0) {
-            throw new RuntimeException("Должен быть один метод с аннотацией @AfterSuite");
+        if(iterat==0){
+            throw new RuntimeException("Должен быть один метод с аннотацией @BeforeSuite");
         }
-        iterat =0;
+        iterat=0;
+///////////////////////////////////////////////////////////////
 
         try {
             beforeSuite.invoke(null);
@@ -49,6 +53,8 @@ public class TestStarter {
             e.printStackTrace();
         }
 
+
+        /////////////////////////////////
         for (Method meth : methods) {
             if (meth.isAnnotationPresent(Test.class)) {
                 try {
@@ -58,7 +64,7 @@ public class TestStarter {
                 }
             }
         }
-
+///////////////////////////////////////////
         try {
             afterSuite.invoke(null);
         }catch (Exception e){

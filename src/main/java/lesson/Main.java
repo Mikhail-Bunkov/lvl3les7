@@ -11,8 +11,8 @@ import java.lang.reflect.Modifier;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-
-TestStarter.start(TestClass1.class);
+Class TestT = TestClass1.class;
+TestStarter.start(TestT);
 
 
 
