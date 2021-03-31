@@ -6,23 +6,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class TestStarter {
     public static void start(Class testClass) {
         int iterat = 0;
+        Method beforeSuite = null;
+        Method afterSuite = null;
         Method[] methods = testClass.getDeclaredMethods();
         for (Method m : methods) {
             if (m.isAnnotationPresent(BeforeSuite.class)) {
                 iterat++;
-
-                try {
-                    m.invoke(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 if (iterat == 2) {
                     throw new RuntimeException("Должен быть один метод с аннотацией @BeforeSuite");
                 }
+                    beforeSuite = m;
             }
         }
         if (iterat == 0) {
@@ -30,6 +28,26 @@ public class TestStarter {
         }
         iterat =0;
 
+
+        for (Method m : methods) {
+            if (m.isAnnotationPresent(AfterSuite.class)) {
+                iterat++;
+                if (iterat == 2) {
+                    throw new RuntimeException("Должен быть один метод с аннотацией @AfterSuite");
+                }
+                    afterSuite = m;
+            }
+        }
+        if (iterat == 0) {
+            throw new RuntimeException("Должен быть один метод с аннотацией @AfterSuite");
+        }
+        iterat =0;
+
+        try {
+            beforeSuite.invoke(null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         for (Method m : methods) {
             if (m.isAnnotationPresent(Test.class)) {
@@ -41,24 +59,10 @@ public class TestStarter {
             }
         }
 
-        for (Method m : methods) {
-            if (m.isAnnotationPresent(AfterSuite.class)) {
-                iterat++;
-
-                try {
-                    m.invoke(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (iterat == 2) {
-                    throw new RuntimeException("Должен быть один метод с аннотацией @AfterSuite");
-                }
-            }
+        try {
+            afterSuite.invoke(null);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        if (iterat == 0) {
-            throw new RuntimeException("Должен быть один метод с аннотацией @AfterSuite");
-        }
-        iterat =0;
-
     }
 }
